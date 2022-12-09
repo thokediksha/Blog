@@ -30,8 +30,6 @@ func TestCreateArticle(t *testing.T) {
 	fmt.Println(w.Body)
 }
 
-
-
 func TestListArticles(t *testing.T) {
 
 	gin.SetMode(gin.TestMode)
@@ -71,5 +69,3 @@ func TestArticleContent(t *testing.T) {
 	w := httptest.NewRecorder()
 	fmt.Println(w.Body)
 }
-
-
