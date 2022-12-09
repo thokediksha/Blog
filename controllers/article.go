@@ -15,7 +15,7 @@ import (
 
 func CreateArticle(c *gin.Context) {
 	var article models.Article
-	
+
 	err := c.ShouldBindWith(&article, binding.Form)
 	if err != nil {
 		c.JSON(400, gin.H{"message": "could not parse the details"})
@@ -30,9 +30,9 @@ func CreateArticle(c *gin.Context) {
 
 	// article.CreatedAt = time.Now()
 	now := time.Now()
-        date := now.Format("Jan 2, 2006")
-    
-     article.CreatedAt = date
+	date := now.Format("Jan 2, 2006")
+
+	article.CreatedAt = date
 
 	err = models.DB.Select("title", "created_at", "nick_name", "content").Create(&article).Error
 	if err != nil {
@@ -41,12 +41,12 @@ func CreateArticle(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"id":   article.ID,
-		"title": article.Title,
-		"nickname": article.NickName,
-		"content": article.Content,
-		"created_at": article.CreatedAt, 	
-		"message": "Succesfully Created Article",
+		"id":         article.ID,
+		"title":      article.Title,
+		"nickname":   article.NickName,
+		"content":    article.Content,
+		"created_at": article.CreatedAt,
+		"message":    "Succesfully Created Article",
 	})
 
 }
@@ -64,19 +64,17 @@ func ListArticles(c *gin.Context) {
 	c.JSON(http.StatusOK, articles)
 }
 
-
 func ArticleContent(c *gin.Context) {
-  var article models.Article
-  
-  err := models.DB.Where("id= ? ",c.Param("id")).First(&article).Error
-  if err != nil {
-	c.JSON(400, gin.H{
-		"message": "cannot find article in database",
-	})
-	return
-  }
-  c.JSON(200, gin.H{
-	"content": article.Content,
-})
-}
+	var article models.Article
 
+	err := models.DB.Where("id= ? ", c.Param("id")).First(&article).Error
+	if err != nil {
+		c.JSON(400, gin.H{
+			"message": "cannot find article in database",
+		})
+		return
+	}
+	c.JSON(200, gin.H{
+		"content": article.Content,
+	})
+}
