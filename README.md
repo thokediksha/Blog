@@ -4,7 +4,7 @@
 
 ### Pre requirements
 
-Go ( >19.04 ) And MYSQL
+Go Version 1.18 And MYSQL
 
 #### Steps to run the application
 
